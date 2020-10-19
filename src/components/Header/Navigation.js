@@ -45,12 +45,13 @@ const StyledNav = styled.nav`
   left: ${({ isOpen }) => (isOpen ? '0' : '-100%')};
   top: 0;
   width: max-content;
-  padding: 3rem 1rem 1rem;
-  background-color: #fff;
-  min-width: 65vw;
+  padding: 5rem 2.8rem 1.8rem 1.6rem;
+  min-width: max-content;
+  max-width: 65vw;
   height: 100vh;
   z-index: 999;
   transition: left 0.3s ease;
+  background-color: ${({ theme: { color } }) => color.secondary};
 `;
 
 const StyledOverlay = styled.div`
@@ -60,7 +61,7 @@ const StyledOverlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.5);
   opacity: ${({ isOpen }) => (isOpen ? '1' : '0')};
   transition: opacity 0.3s ease;
 `;
@@ -71,14 +72,15 @@ const StyledNavItem = styled.div`
 
 const StyledText = styled.p`
   margin: 0;
+  margin-right: 2rem;
   font-size: ${({ theme: { fontSize } }) => fontSize.xs};
   font-weight: ${({ theme: { fontWeight } }) => fontWeight.medium};
+  color: ${({ theme: { color } }) => color.primary};
 `;
 
 const StyledLabel = styled.label`
   display: flex;
   align-items: center;
-  justify-content: space-between;
 `;
 
 const StyledIcon = styled.span`
