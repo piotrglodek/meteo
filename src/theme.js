@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 // fix theme repeat fontSize, fontWeight
-export const theme = {
+export const themes = {
   dark: {
     color: {
       primary: '#808080',
