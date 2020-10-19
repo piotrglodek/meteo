@@ -1,9 +1,14 @@
 import React from 'react';
-// providers
-import { Providers } from './Providers';
+import { ThemeContextProvider } from './themeStore';
+// view
+import { Weather } from './view/Weather';
 
 function App() {
-  return <Providers>Meteo</Providers>;
+  return (
+    <ThemeContextProvider>
+      <Weather />
+    </ThemeContextProvider>
+  );
 }
 
 export default App;
