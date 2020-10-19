@@ -4,9 +4,10 @@ import { createGlobalStyle } from 'styled-components';
 export const themes = {
   dark: {
     color: {
-      primary: '#808080',
-      secondary: '#fffafa',
-      gray: '#7C7C7C',
+      primary: '#fffafa',
+      secondary: '#4e4e4e',
+      gray: '#7c7c7c',
+      accent: '#808080',
     },
     fontSize: {
       xll: '8rem',
@@ -25,9 +26,10 @@ export const themes = {
   },
   light: {
     color: {
-      primary: '#F7E842',
-      secondary: '#4E4E4E',
-      gray: '#7C7C7C',
+      primary: '#4e4e4e',
+      secondary: '#fffafa',
+      gray: '#7c7c7c',
+      accent: '#F7E842',
     },
     fontSize: {
       xll: '8rem',
@@ -47,6 +49,10 @@ export const themes = {
 };
 
 export const GlobalStyles = createGlobalStyle`
+  *,*::after,*::before{
+    box-sizing:border-box;
+  }
+
   html {
     /* 1rem = 10px */
     font-size: 62.5%;
