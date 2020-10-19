@@ -3,15 +3,17 @@ import styled from 'styled-components';
 // components
 import { Hamburger } from './Hamburger';
 import { Navigation } from './Navigation';
+import { Location } from './Location';
 // hook
 import { useMenu } from '../../hooks/useMenu';
 
 export const Header = () => {
-  const [isOpen, toggleMenu] = useMenu();
+  const [isOpen, openMenu, closeMenu] = useMenu();
   return (
     <StyledHeader>
-      <Hamburger toggleMenu={toggleMenu} />
-      <Navigation toggleMenu={toggleMenu} isOpen={isOpen} />
+      <Hamburger toggleMenu={openMenu} />
+      <Navigation toggleMenu={closeMenu} isOpen={isOpen} />
+      <Location />
     </StyledHeader>
   );
 };
