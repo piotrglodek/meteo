@@ -61,5 +61,6 @@ export const GlobalStyles = createGlobalStyle`
     margin:0;
     font-size: 1.6rem;
     font-family: 'Open Sans', sans-serif;
+    transition: color .3s ease, background-color .3s ease, fill .3s ease;
   }
 `;
