@@ -1,12 +1,17 @@
 import React, { useContext } from 'react';
-import { ThemeContext } from '../themeStore';
+import styled from 'styled-components';
+// components
+import { Header } from '../components';
 
 export const Weather = () => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
-
   return (
-    <>
-      {theme} <button onClick={toggleTheme}>onclick</button>
-    </>
+    <StyledView>
+      <Header />
+    </StyledView>
   );
 };
+
+const StyledView = styled.div`
+  width: 100vw;
+  height: 100vh;
+`;
