@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 // components
 import { Header } from '../components';
@@ -14,4 +14,5 @@ export const Weather = () => {
 const StyledView = styled.div`
   width: 100vw;
   height: 100vh;
+  background-color: ${({ theme: { color } }) => color.secondary};
 `;
