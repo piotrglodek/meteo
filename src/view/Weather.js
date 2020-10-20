@@ -1,12 +1,19 @@
-import React, { useContext } from 'react';
-import { ThemeContext } from '../themeStore';
+import React from 'react';
+import styled from 'styled-components';
+// Components
+import { WeatherWidget, Header } from '../components';
 
 export const Weather = () => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
-
   return (
-    <>
-      {theme} <button onClick={toggleTheme}>onclick</button>
-    </>
+    <StyledView>
+      <Header />
+      <WeatherWidget />
+    </StyledView>
   );
 };
+
+const StyledView = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-color: ${({ theme: { color } }) => color.secondary};
+`;

@@ -1,13 +1,18 @@
 import React from 'react';
-import { ThemeContextProvider } from './themeStore';
-// view
+// Theme
+import { ThemeProvider } from './ThemeProvider';
+// Store
+import { StoreContextProvider } from './store';
+// View
 import { Weather } from './view/Weather';
 
 function App() {
   return (
-    <ThemeContextProvider>
-      <Weather />
-    </ThemeContextProvider>
+    <StoreContextProvider>
+      <ThemeProvider>
+        <Weather />
+      </ThemeProvider>
+    </StoreContextProvider>
   );
 }
 
