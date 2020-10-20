@@ -22,6 +22,7 @@ const StyledButton = styled.button`
   place-items: center;
   width: 2.8rem;
   height: 2.8rem;
+  cursor: pointer;
 `;
 
 const StyledMenuIcon = styled(MenuSvg)`
