@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-// theme context
-import { ThemeContext } from '../../themeStore';
-// react toggle
+// Raact toggle
 import Toggle from 'react-toggle';
 import 'react-toggle/style.css';
-import './toggle.css';
+// Store
+import { StoreContext, actionTypes } from '../store';
 
 const Emoji = ({ emoji, label }) => {
   return (
@@ -16,13 +15,23 @@ const Emoji = ({ emoji, label }) => {
   );
 };
 
-export const Navigation = ({ isOpen, toggleMenu }) => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
+export const Nav = ({ isOpen, closeMenu }) => {
+  const [state, dispatch] = useContext(StoreContext);
+  const { theme } = state;
+  const toggleTheme = () => dispatch({ type: actionTypes.TOGGLE_THEME });
 
   return (
     <>
-      {isOpen && <StyledOverlay onClick={toggleMenu} isOpen={isOpen} />}
-      <StyledNav isOpen={isOpen}>
+      {isOpen && (
+        <StyledOverlay
+          aria-hidden={isOpen ? false : true}
+          title='close menu'
+          aria-label='close menu'
+          onClick={closeMenu}
+          isOpen={isOpen}
+        />
+      )}
+      <StyledNav isOpen={isOpen} aria-hidden={isOpen ? false : true}>
         <StyledNavItem>
           <StyledLabel htmlFor='themeSwitch'>
             <StyledText>Theme</StyledText>
@@ -95,9 +104,10 @@ const StyledIcon = styled.span`
   width: 10px;
 `;
 
-Navigation.propTypes = {
+// Proptypes
+Nav.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  toggleMenu: PropTypes.func.isRequired,
+  closeMenu: PropTypes.func.isRequired,
 };
 
 StyledNav.propTypes = {
