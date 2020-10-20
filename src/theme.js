@@ -6,7 +6,7 @@ export const themes = {
     color: {
       primary: '#fffafa',
       secondary: '#4e4e4e',
-      gray: '#7c7c7c',
+      gray: 'rgba(255,255,255,0.72)',
       accent: '#808080',
     },
     fontSize: {
