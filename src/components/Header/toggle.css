@@ -1,0 +1,22 @@
+.react-toggle-thumb {
+  border: none;
+  background-color: #4e4e4e;
+}
+.light .react-toggle-track {
+  background-color: #7c7c7c;
+}
+.dark .react-toggle-track {
+  background-color: rgba(255, 255, 255, 0.72);
+}
+
+.react-toggle--checked:hover .react-toggle-track {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.react-toggle:hover .react-toggle-track {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.react-toggle--checked:hover:not(.react-toggle--disabled) .react-toggle-track {
+  background-color: rgba(0, 0, 0, 0.5);
+}
