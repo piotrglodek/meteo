@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
-// fix theme repeat fontSize, fontWeight
+// FIXME: theme repeat fontSize, fontWeight
 export const themes = {
   dark: {
     color: {
@@ -28,7 +28,7 @@ export const themes = {
     color: {
       primary: '#4e4e4e',
       secondary: '#fffafa',
-      gray: '#7c7c7c',
+      gray: '#6c6c6c',
       accent: '#F7E842',
     },
     fontSize: {
@@ -62,5 +62,44 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 1.6rem;
     font-family: 'Open Sans', sans-serif;
     transition: color .3s ease, background-color .3s ease, fill .3s ease;
+  }
+
+  .darkIcon .accent {
+    fill: #808080;
+  }
+
+  .darkIcon .primary {
+    fill: #fffafa;
+  }
+
+  .lightIcon .accent {
+    fill: #f7e842;
+  }
+
+  .lightIcon .primary {
+    fill: #4e4e4e;
+  }
+
+  .react-toggle-thumb {
+    border: none;
+    background-color: #4e4e4e;
+  }
+  .light .react-toggle-track {
+    background-color: #7c7c7c;
+  }
+  .dark .react-toggle-track {
+    background-color: rgba(255, 255, 255, 0.72);
+  }
+
+  .react-toggle--checked:hover .react-toggle-track {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .react-toggle:hover .react-toggle-track {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .react-toggle--checked:hover:not(.react-toggle--disabled) .react-toggle-track {
+    background-color: rgba(0, 0, 0, 0.5);
   }
 `;
