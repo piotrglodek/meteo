@@ -19,8 +19,8 @@ export const Header = () => {
 };
 
 const StyledHeader = styled.header`
-  width: 100vw;
-  padding: 3rem 1.8rem 2rem;
+  width: 100%;
+  padding: 2rem 1.8rem 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
