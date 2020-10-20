@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-// components
-import { Header, Main } from '../components';
+// Components
+import { WeatherWidget, Header } from '../components';
 
 export const Weather = () => {
   return (
     <StyledView>
       <Header />
-      <Main />
+      <WeatherWidget />
     </StyledView>
   );
 };
