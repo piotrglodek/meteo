@@ -7,7 +7,7 @@ export const Location = () => {
   return (
     <StyledContainer>
       <StyledLocationIcon />
-      <StyledHeading>City</StyledHeading>
+      <StyledHeading>Warsaw</StyledHeading>
     </StyledContainer>
   );
 };
