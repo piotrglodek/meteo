@@ -1,14 +1,24 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+// theme context
+import { ThemeContext } from '../../themeStore';
+// react toggle
 import Toggle from 'react-toggle';
 import 'react-toggle/style.css';
-import { ThemeContext } from '../../themeStore';
+import './toggle.css';
+
+const Emoji = ({ emoji, label }) => {
+  return (
+    <StyledIcon role='img' aria-label={label}>
+      {emoji}
+    </StyledIcon>
+  );
+};
 
 export const Navigation = ({ isOpen, toggleMenu }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
-  // TODO: StyledIcon attribiutes
   return (
     <>
       {isOpen && <StyledOverlay onClick={toggleMenu} isOpen={isOpen} />}
@@ -18,18 +28,11 @@ export const Navigation = ({ isOpen, toggleMenu }) => {
             <StyledText>Theme</StyledText>
             <Toggle
               id='themeSwitch'
-              defaultChecked={theme === 'light' ? true : false}
+              defaultChecked={theme === 'light' ? false : true}
+              className={theme === 'light' ? 'light' : 'dark'}
               icons={{
-                checked: (
-                  <StyledIcon role='img' aria-label='light theme'>
-                    🌞
-                  </StyledIcon>
-                ),
-                unchecked: (
-                  <StyledIcon role='img' aria-label='dark theme'>
-                    🌜
-                  </StyledIcon>
-                ),
+                checked: <Emoji emoji='🌜' label='light theme' />,
+                unchecked: <Emoji emoji='🌞' label='dark theme' />,
               }}
               onChange={toggleTheme}
             />
