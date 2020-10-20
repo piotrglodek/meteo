@@ -1,2 +1,2 @@
-export { Header } from './Header/Header';
-export { Main } from './Main/Main';
+export { WeatherWidget } from './WeatherWidget';
+export { Header } from './Header';
