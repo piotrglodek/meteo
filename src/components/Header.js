@@ -19,7 +19,7 @@ export const Header = () => {
 };
 
 const StyledHeader = styled.header`
-  padding: 2rem 1.8rem 1rem;
+  padding: 1.6rem 1.8rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
