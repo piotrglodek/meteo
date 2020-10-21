@@ -1,135 +1,68 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 // Icon
 import { ReactComponent as WindSvg } from '../static/icons/wind.svg';
-import { ReactComponent as Clear } from '../static/weather/clear.svg';
-import { ReactComponent as Clouds } from '../static/weather/clouds.svg';
-import { ReactComponent as Mist } from '../static/weather/mist.svg';
-import { ReactComponent as Rain } from '../static/weather/rain.svg';
-import { ReactComponent as Snow } from '../static/weather/snow.svg';
-import { ReactComponent as Thunder } from '../static/weather/thunderstorm.svg';
-// Store
-import { StoreContext } from '../store';
-// Loading skelet
-import { WidgetSkelet } from './WidgetSkelet';
-// Api
-import { useQuery } from 'react-query';
-import { fetchCurrentWeather } from '../api/fetchCurrentWeather';
-// Component
-import { NoCity } from './NoCity';
+// component
+import { WeatherIcon } from './WeatherIcon';
 
-const shared = css`
-  width: 100%;
-  height: 100%;
-`;
-const StyledClearIcon = styled(Clear)`
-  ${shared}
-`;
-const StyledCloudsIcon = styled(Clouds)`
-  ${shared}
-`;
-const StyledMistIcon = styled(Mist)`
-  ${shared}
-`;
-const StyledRainIcon = styled(Rain)`
-  ${shared}
-`;
-const StyledSnowIcon = styled(Snow)`
-  ${shared}
-`;
-const StyledThunderIcon = styled(Thunder)`
-  ${shared}
-`;
+export const WeatherWidget = ({ weather }) => {
+  const {
+    city: { name },
+    list,
+  } = weather;
 
-const WeatherIcon = ({ name }) => {
-  const [state] = useContext(StoreContext);
-  const { theme } = state;
-
-  const getWeatherIcon = name => {
-    let key = name.toLowerCase();
-    switch (key) {
-      case 'clear':
-        return (
-          <StyledClearIcon
-            className={theme === 'light' ? 'lightIcon' : 'darkIcon'}
-          />
-        );
-      case 'clouds':
-        return (
-          <StyledCloudsIcon
-            className={theme === 'light' ? 'lightIcon' : 'darkIcon'}
-          />
-        );
-      case 'mist':
-      case 'smoke':
-      case 'haze':
-      case 'dust':
-      case 'fog':
-      case 'sand':
-      case 'ash':
-      case 'squall':
-      case 'tornado':
-        return (
-          <StyledMistIcon
-            className={theme === 'light' ? 'lightIcon' : 'darkIcon'}
-          />
-        );
-      case 'snow':
-        return (
-          <StyledSnowIcon
-            className={theme === 'light' ? 'lightIcon' : 'darkIcon'}
-          />
-        );
-      case 'rain':
-      case 'drizzle':
-        return (
-          <StyledRainIcon
-            className={theme === 'light' ? 'lightIcon' : 'darkIcon'}
-          />
-        );
-      case 'thunderstorm':
-        return (
-          <StyledThunderIcon
-            className={theme === 'light' ? 'lightIcon' : 'darkIcon'}
-          />
-        );
-      default:
-        return null;
-    }
-  };
-  return getWeatherIcon(name);
-};
-
-export const WeatherWidget = () => {
-  const [state] = useContext(StoreContext);
-  const { isLoading, data } = useQuery(state.city, fetchCurrentWeather);
+  // Active weather data
+  const [weatherIndex, setWeatherIndex] = useState(0);
+  const changeWeatherIndex = index => setWeatherIndex(index);
+  // Data
   const roundNumber = number => Math.round(number);
-
+  const weatherName = list[weatherIndex].weather[0].main;
+  const temp = roundNumber(list[weatherIndex].main.temp);
+  const wind = roundNumber(list[weatherIndex].wind.speed);
   return (
-    <StyledMain>
-      {isLoading ? (
-        <WidgetSkelet />
-      ) : data.cod === 200 ? (
-        <>
-          <StyledImageCol>
-            <WeatherIcon name={data.weather[0].main} />
-          </StyledImageCol>
-          <StyledWidgetCol>
-            <StyledH1>{data.name}</StyledH1>
-            <StyledH2>{roundNumber(data.main.temp)}</StyledH2>
-            <StyledSubtitle>{data.weather[0].main}</StyledSubtitle>
-            <StyledWrapper>
-              <StyledWindIcon />
-              <StyledText>Wind</StyledText>
-              <StyledSubtext>{roundNumber(data.wind.speed)}m/s</StyledSubtext>
-            </StyledWrapper>
-          </StyledWidgetCol>
-        </>
-      ) : (
-        <NoCity />
-      )}
-    </StyledMain>
+    <>
+      <StyledImageCol>
+        <WeatherIcon name={weatherName} />
+      </StyledImageCol>
+      <StyledWidgetCol>
+        <StyledH1>{name}</StyledH1>
+        <StyledH2>{temp}</StyledH2>
+        <StyledSubtitle>{weatherName}</StyledSubtitle>
+        <StyledWrapper>
+          <StyledWindIcon />
+          <StyledText>Wind</StyledText>
+          <StyledSubtext>{wind}m/s</StyledSubtext>
+        </StyledWrapper>
+      </StyledWidgetCol>
+      <StyledMore>
+        <StyledMoreScroll>
+          {list.map((item, index) => {
+            const { weather, dt_txt } = item;
+            const name = weather[0].main;
+            const returnZeroBefore = hour => {
+              return hour < 10 ? `0${hour}` : hour;
+            };
+            const hour =
+              index === 0
+                ? 'Now'
+                : returnZeroBefore(new Date(dt_txt).getHours());
+            return (
+              <StyledMoreButton
+                key={index}
+                onClick={() => changeWeatherIndex(index)}
+                isActive={weatherIndex === index && true}
+              >
+                <StyledMoreTitle>{hour}</StyledMoreTitle>
+                <StyledMoreImage>
+                  <WeatherIcon name={name} />
+                </StyledMoreImage>
+              </StyledMoreButton>
+            );
+          })}
+        </StyledMoreScroll>
+      </StyledMore>
+    </>
   );
 };
 
@@ -162,19 +95,18 @@ const grayColor = css`
 
 //
 
-const StyledMain = styled.main`
-  width: 100%;
-  display: flex;
-`;
 const StyledImageCol = styled.div`
   flex: 2;
   display: grid;
   place-items: center;
+  padding-right: 1rem;
+  padding-left: 1.8rem;
 `;
 const StyledWidgetCol = styled.div`
   ${flex}
   flex: 1;
-  padding: 0 1.8rem;
+  padding-right: 1.8rem;
+  padding-left: 1rem;
 `;
 const StyledH1 = styled.h1`
   ${primaryColor}
@@ -257,7 +189,72 @@ const StyledSubtext = styled.p`
   font-size: ${({ theme: { fontSize } }) => fontSize.m};
 `;
 
-// Proptypes
-WeatherIcon.propTypes = {
-  name: PropTypes.string.isRequired,
+const StyledMore = styled.footer`
+  width: 100%;
+  padding: 0 1.8rem;
+  margin: 4.5rem 0;
+`;
+
+const StyledMoreScroll = styled.div`
+  display: flex;
+  overflow-x: hidden;
+  padding-bottom: 1rem;
+
+  &:hover {
+    overflow-x: auto;
+  }
+
+  @media screen and (min-width: 450px) {
+    justify-content: center;
+  }
+`;
+
+const StyledMoreButton = styled.button`
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0.8rem;
+  margin: 0;
+  flex: 0 0 65px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+
+  &::after {
+    content: '';
+    transition: opacity 0.3s ease;
+    border-radius: 0.4rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: ${({ theme: { color } }) => color.gray};
+    opacity: ${({ isActive }) => (isActive ? '0.2' : '0')};
+    z-index: -1;
+  }
+  /* 
+  &:hover::after {
+    opacity: 0.2;
+  } */
+`;
+
+const StyledMoreTitle = styled.p`
+  ${margin}
+  ${lineHeight}
+  ${primaryColor}
+  ${mediumWeight}
+  margin-bottom:1.2rem;
+  font-size: ${({ theme: { fontSize } }) => fontSize.s};
+`;
+
+const StyledMoreImage = styled.div`
+  height: 2.4rem;
+`;
+
+WeatherWidget.propTypes = {
+  weather: PropTypes.object.isRequired,
 };

@@ -27,6 +27,6 @@ const StyledCityIcon = styled.img`
 
 const StyledText = styled.p`
   font-size: ${({ theme: { fontSize } }) => fontSize.l};
-  font-weight: ${({ theme: { fontWeight } }) => fontWeight.bold};
+  font-weight: ${({ theme: { fontWeight } }) => fontWeight.medium};
   color: ${({ theme: { color } }) => color.primary};
 `;
