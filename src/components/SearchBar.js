@@ -44,7 +44,6 @@ const StyledLabel = styled.label`
 const StyledInput = styled.input`
   display: block;
   width: 100%;
-  height: 2.4rem;
   padding: 0;
   margin: 0;
   border: 0;
@@ -55,4 +54,5 @@ const StyledInput = styled.input`
   font-size: ${({ theme: { fontSize } }) => fontSize.s};
   font-weight: ${({ theme: { fontWeight } }) => fontWeight.medium};
   color: ${({ theme: { color } }) => color.primary};
+  height: 3.4rem;
 `;
