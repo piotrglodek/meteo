@@ -1,23 +1,24 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { keyframes, css } from 'styled-components';
-import { ReactComponent as WindSvg } from '../static/icons/wind.svg';
 
 export const WidgetSkelet = () => {
   return (
     <>
       <StyledImageCol>
-        <StyledSkeletet w='145px' h='145px' circle={true} />
+        <StyledSkelet w='145px' h='145px' circle={true} />
       </StyledImageCol>
       <StyledWidgetCol>
-        <StyledSkeletet w='120px' h='36px' round={2} />
-        <StyledSkeletet w='100px' h='70px' round={2} />
-        <StyledSkeletet w='60px' h='18px' round={2} />
+        <StyledSkelet w='120px' h='36px' round={2} />
+        <StyledSkelet w='100px' h='70px' round={2} />
+        <StyledSkelet w='60px' h='18px' round={2} />
         <StyledWrapper>
-          <StyledWindIcon />
-          <StyledText>Wind</StyledText>
-          <StyledSkeletet w='20px' h='16px' round={2} />
+          <StyledSkelet w='20px' h='46px' round={2} />
         </StyledWrapper>
       </StyledWidgetCol>
+      <StyledMore>
+        <StyledSkelet w='100%' h='76px' round={4} />
+      </StyledMore>
     </>
   );
 };
@@ -41,7 +42,7 @@ const load = keyframes`
 }
 `;
 
-const StyledSkeletet = styled.div`
+const StyledSkelet = styled.div`
   width: ${({ w }) => w};
   height: ${({ h }) => h};
   background-color: ${({ theme: { color } }) => color.gray};
@@ -78,18 +79,16 @@ const StyledWrapper = styled.div`
   margin-bottom: 2.5rem;
   ${flex}
 `;
-const StyledWindIcon = styled(WindSvg)`
-  height: 1.8rem;
 
-  & path {
-    fill: ${({ theme: { color } }) => color.primary};
-  }
+const StyledMore = styled.div`
+  margin: 4.5rem 0;
+  width: 100%;
+  padding: 0 1.8rem;
 `;
-const StyledText = styled.p`
-  margin: 0;
-  line-height: 1;
-  font-weight: ${({ theme: { fontWeight } }) => fontWeight.medium};
-  color: ${({ theme: { color } }) => color.gray};
-  margin-top: 0.8rem;
-  font-size: ${({ theme: { fontSize } }) => fontSize.xs};
-`;
+
+StyledSkelet.propTypes = {
+  w: PropTypes.string.isRequired,
+  h: PropTypes.string.isRequired,
+  round: PropTypes.number,
+  circle: PropTypes.bool,
+};
