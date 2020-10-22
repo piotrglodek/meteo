@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://meteo-weather.netlify.app">
-    <img src="https://github.com/piotrglodek/meteo/main/readme/logo.png" alt="Meteo logo">
+    <img src="https://github.com/piotrglodek/meteo/blob/main/readme/logo.png" alt="Meteo logo">
   </a>
 </p>
 
