@@ -30,12 +30,14 @@ To start editing app:
 
 1. Clone the repo: `git clone https://github.com/piotrglodek/meteo.git`
 2. Install with [npm](https://www.npmjs.com/): `npm install`
-3. Run with npm: `npm start`
-4. Open `http://localhost:3000` in your browser, and voilà.
+3. Create account in [free weather api](https://openweathermap.org/api), and get API KEY
+4. Create in root directory file `.env` and inside write `REACT_APP_API=[your api key]`
+5. Run with npm: `npm start`
+6. Open `http://localhost:3000` in your browser, and voilà.
 
 ## Features
 
-- 5 days forecast
+- more forecast
 - theme preference is saved in localstorage
 
 ### License
