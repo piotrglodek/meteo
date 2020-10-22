@@ -1,23 +1,26 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
-// Icon
+// Icons
 import { ReactComponent as WindSvg } from '../static/icons/wind.svg';
+import { ReactComponent as SunSvg } from '../static/icons/sun.svg';
 // component
 import { WeatherIcon } from './WeatherIcon';
+// hook
+import { useWeatherIndex } from '../hooks/useWeatherIndex';
 
 export const WeatherWidget = ({ weather }) => {
   const {
-    city: { name },
+    city: { name, country },
     list,
   } = weather;
 
   // Active weather data
-  const [weatherIndex, setWeatherIndex] = useState(0);
-  const changeWeatherIndex = index => setWeatherIndex(index);
+  const [weatherIndex, changeWeatherIndex] = useWeatherIndex();
   // Data
   const roundNumber = number => Math.round(number);
   const weatherName = list[weatherIndex].weather[0].main;
+  const weatherDescription = list[weatherIndex].weather[0].description;
   const temp = roundNumber(list[weatherIndex].main.temp);
   const wind = roundNumber(list[weatherIndex].wind.speed);
   return (
@@ -27,8 +30,16 @@ export const WeatherWidget = ({ weather }) => {
       </StyledImageCol>
       <StyledWidgetCol>
         <StyledH1>{name}</StyledH1>
+        <StyledCountryImg
+          src={`https://www.countryflags.io/${country}/flat/16.png`}
+        />
         <StyledH2>{temp}</StyledH2>
         <StyledSubtitle>{weatherName}</StyledSubtitle>
+        <StyledWrapper>
+          <StyledSunIcon />
+          <StyledText>About weather</StyledText>
+          <StyledSubtext>{weatherDescription}</StyledSubtext>
+        </StyledWrapper>
         <StyledWrapper>
           <StyledWindIcon />
           <StyledText>Wind</StyledText>
@@ -93,6 +104,10 @@ const grayColor = css`
   color: ${({ theme: { color } }) => color.gray};
 `;
 
+const alignTextRight = css`
+  text-align: right;
+`;
+
 //
 
 const StyledImageCol = styled.div`
@@ -101,6 +116,9 @@ const StyledImageCol = styled.div`
   place-items: center;
   padding-right: 1rem;
   padding-left: 1.8rem;
+  @media screen and (min-width: 450px) {
+    flex: 1;
+  }
 `;
 const StyledWidgetCol = styled.div`
   ${flex}
@@ -111,10 +129,16 @@ const StyledWidgetCol = styled.div`
 const StyledH1 = styled.h1`
   ${primaryColor}
   ${margin}
+  ${alignTextRight}
   font-size: ${({ theme: { fontSize } }) => fontSize.xl};
   font-weight: ${({ theme: { fontWeight } }) => fontWeight.bold};
-  text-align: right;
 `;
+
+const StyledCountryImg = styled.img`
+  display: block;
+  margin: 0.5rem 0;
+`;
+
 const StyledH2 = styled.h2`
   ${margin}
   ${lineHeight}
@@ -172,6 +196,13 @@ const StyledWindIcon = styled(WindSvg)`
     fill: ${({ theme: { color } }) => color.primary};
   }
 `;
+const StyledSunIcon = styled(SunSvg)`
+  height: 1.8rem;
+
+  & path {
+    fill: ${({ theme: { color } }) => color.primary};
+  }
+`;
 const StyledText = styled.p`
   ${margin}
   ${lineHeight}
@@ -179,6 +210,7 @@ const StyledText = styled.p`
   ${grayColor}
 
   margin-top: .8rem;
+  margin-bottom: 0.4rem;
   font-size: ${({ theme: { fontSize } }) => fontSize.xs};
 `;
 const StyledSubtext = styled.p`
@@ -186,6 +218,7 @@ const StyledSubtext = styled.p`
   ${lineHeight}
   ${primaryColor}
   ${mediumWeight}
+  ${alignTextRight}
   font-size: ${({ theme: { fontSize } }) => fontSize.m};
 `;
 
@@ -236,10 +269,6 @@ const StyledMoreButton = styled.button`
     opacity: ${({ isActive }) => (isActive ? '0.2' : '0')};
     z-index: -1;
   }
-  /* 
-  &:hover::after {
-    opacity: 0.2;
-  } */
 `;
 
 const StyledMoreTitle = styled.p`
