@@ -2,14 +2,14 @@ import React, { useContext } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 // Icons
-import { ReactComponent as Clear } from '../static/weather/clear.svg';
-import { ReactComponent as Clouds } from '../static/weather/clouds.svg';
-import { ReactComponent as Mist } from '../static/weather/mist.svg';
-import { ReactComponent as Rain } from '../static/weather/rain.svg';
-import { ReactComponent as Snow } from '../static/weather/snow.svg';
-import { ReactComponent as Thunder } from '../static/weather/thunderstorm.svg';
+import { ReactComponent as Clear } from '../../static/weather/clear.svg';
+import { ReactComponent as Clouds } from '../../static/weather/clouds.svg';
+import { ReactComponent as Mist } from '../../static/weather/mist.svg';
+import { ReactComponent as Rain } from '../../static/weather/rain.svg';
+import { ReactComponent as Snow } from '../../static/weather/snow.svg';
+import { ReactComponent as Thunder } from '../../static/weather/thunderstorm.svg';
 // Hook
-import { StoreContext } from '../store';
+import { StoreContext } from '../../store';
 
 const shared = css`
   width: 100%;
