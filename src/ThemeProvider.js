@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 // themes GlobalStyles
 import { theme, dark, light, GlobalStyles } from './theme';
-// store
+// Store
 import { StoreContext } from './store';
 
 export const ThemeProvider = ({ children }) => {
