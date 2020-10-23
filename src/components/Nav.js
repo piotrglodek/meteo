@@ -4,7 +4,7 @@ import styled from 'styled-components';
 // Raact toggle
 import Toggle from 'react-toggle';
 import 'react-toggle/style.css';
-// Store
+// Hook
 import { StoreContext, actionTypes } from '../store';
 
 const Emoji = ({ emoji, label }) => {
@@ -17,8 +17,15 @@ const Emoji = ({ emoji, label }) => {
 
 export const Nav = ({ isOpen, closeMenu }) => {
   const [state, dispatch] = useContext(StoreContext);
-  const { theme } = state;
-  const toggleTheme = () => dispatch({ type: actionTypes.TOGGLE_THEME });
+  const { darkTheme } = state;
+  const toggleTheme = () => {
+    if (darkTheme) {
+      window.localStorage.setItem('darkTheme', false);
+    } else {
+      window.localStorage.setItem('darkTheme', true);
+    }
+    dispatch({ type: actionTypes.TOGGLE_THEME });
+  };
 
   return (
     <>
@@ -37,11 +44,11 @@ export const Nav = ({ isOpen, closeMenu }) => {
             <StyledText>Theme</StyledText>
             <Toggle
               id='themeSwitch'
-              defaultChecked={theme === 'light' ? false : true}
-              className={theme === 'light' ? 'light' : 'dark'}
+              defaultChecked={darkTheme ? true : false}
+              className={darkTheme ? 'dark' : 'light'}
               icons={{
-                checked: <Emoji emoji='🌜' label='light theme' />,
-                unchecked: <Emoji emoji='🌞' label='dark theme' />,
+                unchecked: <Emoji emoji='🌞' label='light theme' />,
+                checked: <Emoji emoji='🌜' label='dark theme' />,
               }}
               onChange={toggleTheme}
             />
