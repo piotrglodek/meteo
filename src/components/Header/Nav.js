@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Toggle from 'react-toggle';
 import 'react-toggle/style.css';
 // Hook
-import { StoreContext, actionTypes } from '../store';
+import { StoreContext, actionTypes } from '../../store';
 
 const Emoji = ({ emoji, label }) => {
   return (
