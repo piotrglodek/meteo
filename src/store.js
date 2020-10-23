@@ -1,9 +1,9 @@
-import React, { useReducer, createContext } from 'react';
+import React, { useReducer, createContext, useEffect } from 'react';
 
 export const StoreContext = createContext();
 
 const initialState = {
-  theme: 'light',
+  darkTheme: false,
   city: 'Warsaw',
 };
 
@@ -13,12 +13,13 @@ export const actionTypes = {
 };
 
 const reducer = (state, action) => {
+  const { payload } = action;
+
   switch (action.type) {
     case actionTypes.UPDATE_CITY:
-      return { ...state, city: action.payload };
+      return { ...state, city: payload };
     case actionTypes.TOGGLE_THEME:
-      const currTheme = state.theme;
-      return { ...state, theme: currTheme === 'light' ? 'dark' : 'light' };
+      return { ...state, darkTheme: !state.darkTheme };
     default:
       throw new Error();
   }
@@ -26,6 +27,14 @@ const reducer = (state, action) => {
 
 export const StoreContextProvider = props => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    const localTheme = window.localStorage.getItem('darkTheme');
+    if (localTheme === 'true') {
+      dispatch({ type: actionTypes.TOGGLE_THEME });
+    }
+  }, []);
+
   return (
     <StoreContext.Provider value={[state, dispatch]}>
       {props.children}

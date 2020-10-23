@@ -1,50 +1,37 @@
 import { createGlobalStyle } from 'styled-components';
 
-// FIXME: theme repeat fontSize, fontWeight
-export const themes = {
-  dark: {
-    color: {
-      primary: '#fffafa',
-      secondary: '#4e4e4e',
-      gray: 'rgba(255,255,255,0.72)',
-      accent: '#808080',
-    },
-    fontSize: {
-      xll: '8rem',
-      xl: '2.8rem',
-      l: '2.2rem',
-      m: '1.8rem',
-      s: '1.4rem',
-      xs: '1.2rem',
-      xss: '1rem',
-    },
-    fontWeight: {
-      regular: '400',
-      medium: '600',
-      bold: '800',
-    },
+export const dark = {
+  color: {
+    primary: '#fffafa',
+    secondary: '#4e4e4e',
+    gray: 'rgba(255,255,255,0.72)',
+    accent: '#808080',
   },
-  light: {
-    color: {
-      primary: '#4e4e4e',
-      secondary: '#fffafa',
-      gray: '#6c6c6c',
-      accent: '#F7E842',
-    },
-    fontSize: {
-      xll: '8rem',
-      xl: '2.8rem',
-      l: '2.2rem',
-      m: '1.8rem',
-      s: '1.4rem',
-      xs: '1.2rem',
-      xss: '1rem',
-    },
-    fontWeight: {
-      regular: '400',
-      medium: '600',
-      bold: '800',
-    },
+};
+
+export const light = {
+  color: {
+    primary: '#4e4e4e',
+    secondary: '#fffafa',
+    gray: '#6c6c6c',
+    accent: '#F7E842',
+  },
+};
+
+export const theme = {
+  fontSize: {
+    xll: '8rem',
+    xl: '2.8rem',
+    l: '2.2rem',
+    m: '1.8rem',
+    s: '1.4rem',
+    xs: '1.2rem',
+    xss: '1rem',
+  },
+  fontWeight: {
+    regular: '400',
+    medium: '600',
+    bold: '800',
   },
 };
 

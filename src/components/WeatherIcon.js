@@ -8,7 +8,7 @@ import { ReactComponent as Mist } from '../static/weather/mist.svg';
 import { ReactComponent as Rain } from '../static/weather/rain.svg';
 import { ReactComponent as Snow } from '../static/weather/snow.svg';
 import { ReactComponent as Thunder } from '../static/weather/thunderstorm.svg';
-// Store
+// Hook
 import { StoreContext } from '../store';
 
 const shared = css`
@@ -36,22 +36,18 @@ const StyledThunderIcon = styled(Thunder)`
 
 export const WeatherIcon = ({ name }) => {
   const [state] = useContext(StoreContext);
-  const { theme } = state;
+  const { darkTheme } = state;
 
   const getWeatherIcon = name => {
     let key = name.toLowerCase();
     switch (key) {
       case 'clear':
         return (
-          <StyledClearIcon
-            className={theme === 'light' ? 'lightIcon' : 'darkIcon'}
-          />
+          <StyledClearIcon className={darkTheme ? 'darkIcon' : 'lightIcon'} />
         );
       case 'clouds':
         return (
-          <StyledCloudsIcon
-            className={theme === 'light' ? 'lightIcon' : 'darkIcon'}
-          />
+          <StyledCloudsIcon className={darkTheme ? 'darkIcon' : 'lightIcon'} />
         );
       case 'mist':
       case 'smoke':
@@ -63,28 +59,20 @@ export const WeatherIcon = ({ name }) => {
       case 'squall':
       case 'tornado':
         return (
-          <StyledMistIcon
-            className={theme === 'light' ? 'lightIcon' : 'darkIcon'}
-          />
+          <StyledMistIcon className={darkTheme ? 'darkIcon' : 'lightIcon'} />
         );
       case 'snow':
         return (
-          <StyledSnowIcon
-            className={theme === 'light' ? 'lightIcon' : 'darkIcon'}
-          />
+          <StyledSnowIcon className={darkTheme ? 'darkIcon' : 'lightIcon'} />
         );
       case 'rain':
       case 'drizzle':
         return (
-          <StyledRainIcon
-            className={theme === 'light' ? 'lightIcon' : 'darkIcon'}
-          />
+          <StyledRainIcon className={darkTheme ? 'darkIcon' : 'lightIcon'} />
         );
       case 'thunderstorm':
         return (
-          <StyledThunderIcon
-            className={theme === 'light' ? 'lightIcon' : 'darkIcon'}
-          />
+          <StyledThunderIcon className={darkTheme ? 'darkIcon' : 'lightIcon'} />
         );
       default:
         return null;

@@ -2,14 +2,21 @@ import React, { useContext } from 'react';
 // Styled-components theme provider
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 // themes GlobalStyles
-import { themes, GlobalStyles } from './theme';
-// Store
+import { theme, dark, light, GlobalStyles } from './theme';
+// store
 import { StoreContext } from './store';
 
 export const ThemeProvider = ({ children }) => {
-  const [store] = useContext(StoreContext);
+  const [state] = useContext(StoreContext);
+  const { darkTheme } = state;
+  const selectTheme = darkTheme
+    ? Object.assign(dark, theme)
+    : Object.assign(light, theme);
+
+  console.log(darkTheme ? 'theme dark' : 'theme light');
+
   return (
-    <StyledThemeProvider theme={themes[store.theme]}>
+    <StyledThemeProvider theme={selectTheme}>
       <GlobalStyles />
       {children}
     </StyledThemeProvider>
