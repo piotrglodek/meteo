@@ -39,6 +39,7 @@ To start editing app:
 
 - more forecast
 - theme preference is saved in localstorage
+- fix passing theme object clone 
 
 ### License
 
