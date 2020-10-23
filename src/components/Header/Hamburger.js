@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 // Icon
-import { ReactComponent as MenuSvg } from '../static/icons/menu.svg';
+import { ReactComponent as MenuSvg } from '../../static/icons/menu.svg';
 
 export const Hamburger = ({ openMenu }) => {
   return (

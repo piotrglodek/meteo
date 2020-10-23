@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 // Store
-import { StoreContext, actionTypes } from '../store';
+import { StoreContext, actionTypes } from '../../store';
 
 export const SearchBar = () => {
   const [, dispatch] = useContext(StoreContext);

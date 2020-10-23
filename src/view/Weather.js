@@ -1,14 +1,17 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-// Components
-import { WeatherWidget, Header } from '../components';
 // Api
 import { useQuery } from 'react-query';
 import { fetchWeather } from '../api/fetchWeather';
 // Store
 import { StoreContext } from '../store';
-// Loading skelet
-import { WidgetSkelet, NoCity } from '../components';
+// Components
+import {
+  WeatherNoCity,
+  WeatherSkelet,
+  WeatherWidget,
+  Header,
+} from '../components';
 
 export const Weather = () => {
   const [state] = useContext(StoreContext);
@@ -19,11 +22,11 @@ export const Weather = () => {
         <Header />
         <StyledMain>
           {isLoading ? (
-            <WidgetSkelet />
+            <WeatherSkelet />
           ) : data.cod === '200' ? (
             <WeatherWidget weather={data} />
           ) : (
-            <NoCity />
+            <WeatherNoCity />
           )}
         </StyledMain>
       </StyledContainer>
@@ -32,8 +35,8 @@ export const Weather = () => {
 };
 
 const StyledView = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  min-height: 100vh;
   background-color: ${({ theme: { color } }) => color.secondary};
 `;
 

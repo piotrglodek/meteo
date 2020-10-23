@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-// icon
-import citySvg from '../static/icons/city.svg';
+// Icon
+import citySvg from '../../static/icons/city.svg';
 
-export const NoCity = () => {
+export const WeatherNoCity = () => {
   return (
     <StyledContainer>
       <StyledCityIcon src={citySvg} alt='City' />
