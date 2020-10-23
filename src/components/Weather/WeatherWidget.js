@@ -1,44 +1,56 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 // Icons
-import { ReactComponent as WindSvg } from '../static/icons/wind.svg';
-import { ReactComponent as SunSvg } from '../static/icons/sun.svg';
-// component
+import { ReactComponent as WindSvg } from '../../static/icons/wind.svg';
+import { ReactComponent as SunSvg } from '../../static/icons/sun.svg';
+// Components
 import { WeatherIcon } from './WeatherIcon';
-// hook
-import { useWeatherIndex } from '../hooks/useWeatherIndex';
+import { WeatherMore } from './WeatherMore';
+// Hook
+import { useWeatherId } from '../../hooks/useWeatherId';
+// Helpers
+import { roundNumber } from '../../helpers';
 
 export const WeatherWidget = ({ weather }) => {
+  // Destructuring weather data
+  // name: city name
+  // country: country code
+  // list: array of object containg info about weather
   const {
-    city: { name, country },
+    city: { name: cityName, country: countryCode },
     list,
   } = weather;
-
-  // Active weather data
-  const [weatherIndex, changeWeatherIndex] = useWeatherIndex();
+  // Add id for every list item
+  list.forEach((item, i) => {
+    item.id = i;
+  });
+  // Depending on id show data
+  const [id, changeId] = useWeatherId();
   // Data
-  const roundNumber = number => Math.round(number);
-  const weatherName = list[weatherIndex].weather[0].main;
-  const weatherDescription = list[weatherIndex].weather[0].description;
-  const temp = roundNumber(list[weatherIndex].main.temp);
-  const wind = roundNumber(list[weatherIndex].wind.speed);
+  // weather data item
+  const item = list.find(item => item.id === id);
+  const name = item.weather[0].main;
+  const description = item.weather[0].description;
+  const temp = roundNumber(item.main.temp);
+  const wind = roundNumber(item.wind.speed);
   return (
     <>
       <StyledImageCol>
-        <WeatherIcon name={weatherName} />
+        <WeatherIcon name={name} />
       </StyledImageCol>
       <StyledWidgetCol>
-        <StyledH1>{name}</StyledH1>
+        <StyledH1>{cityName}</StyledH1>
         <StyledCountryImg
-          src={`https://www.countryflags.io/${country}/flat/16.png`}
+          alt={`${countryCode} country code flag`}
+          src={`https://flagcdn.com/24x18/${countryCode.toLowerCase()}.png`}
         />
         <StyledH2>{temp}</StyledH2>
-        <StyledSubtitle>{weatherName}</StyledSubtitle>
+        <StyledSubtitle>{name}</StyledSubtitle>
         <StyledWrapper>
           <StyledSunIcon />
           <StyledText>About weather</StyledText>
-          <StyledSubtext>{weatherDescription}</StyledSubtext>
+          <StyledSubtext>{description}</StyledSubtext>
         </StyledWrapper>
         <StyledWrapper>
           <StyledWindIcon />
@@ -46,33 +58,8 @@ export const WeatherWidget = ({ weather }) => {
           <StyledSubtext>{wind}m/s</StyledSubtext>
         </StyledWrapper>
       </StyledWidgetCol>
-      <StyledMore>
-        <StyledMoreScroll>
-          {list.map((item, index) => {
-            const { weather, dt_txt } = item;
-            const name = weather[0].main;
-            const returnZeroBefore = hour => {
-              return hour < 10 ? `0${hour}` : hour;
-            };
-            const hour =
-              index === 0
-                ? 'Now'
-                : returnZeroBefore(new Date(dt_txt).getHours());
-            return (
-              <StyledMoreButton
-                key={index}
-                onClick={() => changeWeatherIndex(index)}
-                isActive={weatherIndex === index && true}
-              >
-                <StyledMoreTitle>{hour}</StyledMoreTitle>
-                <StyledMoreImage>
-                  <WeatherIcon name={name} />
-                </StyledMoreImage>
-              </StyledMoreButton>
-            );
-          })}
-        </StyledMoreScroll>
-      </StyledMore>
+
+      <WeatherMore list={list} id={id} changeId={changeId} />
     </>
   );
 };
@@ -220,68 +207,6 @@ const StyledSubtext = styled.p`
   ${mediumWeight}
   ${alignTextRight}
   font-size: ${({ theme: { fontSize } }) => fontSize.m};
-`;
-
-const StyledMore = styled.footer`
-  width: 100%;
-  padding: 0 1.8rem;
-  margin: 4.5rem 0;
-`;
-
-const StyledMoreScroll = styled.div`
-  display: flex;
-  overflow-x: hidden;
-  padding-bottom: 1rem;
-
-  &:hover {
-    overflow-x: auto;
-  }
-
-  @media screen and (min-width: 450px) {
-    justify-content: center;
-  }
-`;
-
-const StyledMoreButton = styled.button`
-  background: none;
-  border: none;
-  outline: none;
-  padding: 0.8rem;
-  margin: 0;
-  flex: 0 0 65px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-  z-index: 2;
-
-  &::after {
-    content: '';
-    transition: opacity 0.3s ease;
-    border-radius: 0.4rem;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: ${({ theme: { color } }) => color.gray};
-    opacity: ${({ isActive }) => (isActive ? '0.2' : '0')};
-    z-index: -1;
-  }
-`;
-
-const StyledMoreTitle = styled.p`
-  ${margin}
-  ${lineHeight}
-  ${primaryColor}
-  ${mediumWeight}
-  margin-bottom:1.2rem;
-  font-size: ${({ theme: { fontSize } }) => fontSize.s};
-`;
-
-const StyledMoreImage = styled.div`
-  height: 2.4rem;
 `;
 
 WeatherWidget.propTypes = {

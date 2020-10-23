@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { keyframes, css } from 'styled-components';
 
-export const WidgetSkelet = () => {
+export const WeatherSkelet = () => {
   return (
     <>
       <StyledImageCol>
@@ -13,11 +13,16 @@ export const WidgetSkelet = () => {
         <StyledSkelet w='100px' h='70px' round={2} />
         <StyledSkelet w='60px' h='18px' round={2} />
         <StyledWrapper>
-          <StyledSkelet w='20px' h='46px' round={2} />
+          <StyledSkelet w='30px' h='18px' round={2} />
+          <StyledSkelet w='80px' h='12px' round={2} />
+          <StyledSkelet w='120px' h='18px' round={2} />
+          <StyledSkelet w='30px' h='18px' round={2} />
+          <StyledSkelet w='80px' h='12px' round={2} />
+          <StyledSkelet w='120px' h='18px' round={2} />
         </StyledWrapper>
       </StyledWidgetCol>
       <StyledMore>
-        <StyledSkelet w='100%' h='76px' round={4} />
+        <StyledSkelet w='100%' h='160px' round={4} />
       </StyledMore>
     </>
   );
@@ -81,9 +86,8 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledMore = styled.div`
-  margin: 4.5rem 0;
   width: 100%;
-  padding: 0 1.8rem;
+  padding: 3rem 1.8rem;
 `;
 
 StyledSkelet.propTypes = {
