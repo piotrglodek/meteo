@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 // Hook
-import { useMenu } from '../hooks/useMenu';
-// components
+import { useMenu } from '../../hooks/useMenu';
+// Components
 import { Hamburger } from './Hamburger';
 import { Nav } from './Nav';
 import { SearchBar } from './SearchBar';
