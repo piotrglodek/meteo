@@ -13,8 +13,6 @@ export const ThemeProvider = ({ children }) => {
     ? Object.assign(dark, theme)
     : Object.assign(light, theme);
 
-  console.log(darkTheme ? 'theme dark' : 'theme light');
-
   return (
     <StyledThemeProvider theme={selectTheme}>
       <GlobalStyles />
