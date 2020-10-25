@@ -13,6 +13,7 @@ export const SearchBar = () => {
     e.preventDefault();
     if (value) {
       dispatch({ type: actionTypes.UPDATE_CITY, payload: value });
+      window.localStorage.setItem('city', value);
       setValue('');
     }
   };

@@ -21,10 +21,11 @@ export const Nav = ({ isOpen, closeMenu }) => {
   const toggleTheme = () => {
     if (darkTheme) {
       window.localStorage.setItem('darkTheme', false);
+      dispatch({ type: actionTypes.TOGGLE_THEME, payload: false });
     } else {
       window.localStorage.setItem('darkTheme', true);
+      dispatch({ type: actionTypes.TOGGLE_THEME, payload: true });
     }
-    dispatch({ type: actionTypes.TOGGLE_THEME });
   };
 
   return (
