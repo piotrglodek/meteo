@@ -29,9 +29,15 @@ export const StoreContextProvider = props => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
+    // Theme storage
     const localTheme = window.localStorage.getItem('darkTheme');
     if (localTheme === 'true') {
       dispatch({ type: actionTypes.TOGGLE_THEME, payload: true });
+    }
+    // City storage
+    const localCity = window.localStorage.getItem('city');
+    if (localCity) {
+      dispatch({ type: actionTypes.UPDATE_CITY, payload: localCity });
     }
   }, []);
 
