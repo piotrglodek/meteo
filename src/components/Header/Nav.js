@@ -47,8 +47,8 @@ export const Nav = ({ isOpen, closeMenu }) => {
               defaultChecked={darkTheme ? true : false}
               className={darkTheme ? 'dark' : 'light'}
               icons={{
-                unchecked: <Emoji emoji='🌞' label='light theme' />,
-                checked: <Emoji emoji='🌜' label='dark theme' />,
+                unchecked: <Emoji emoji='🌜' label='light theme' />,
+                checked: <Emoji emoji='🌞' label='dark theme' />,
               }}
               onChange={toggleTheme}
             />
