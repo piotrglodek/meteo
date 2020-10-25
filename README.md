@@ -37,9 +37,10 @@ To start editing app:
 
 ## Features
 
-- more forecast
-- theme preference is saved in localstorage
-- fix passing theme object clone 
+- more forecast ✅
+- theme preference is saved in localstorage ✅
+- fix passing theme object clone ✅
+- city is saved in localstorage ✅
 
 ### License
 
